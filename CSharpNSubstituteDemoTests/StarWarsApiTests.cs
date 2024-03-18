@@ -18,6 +18,10 @@ public class StarWarsApiTests
         var person = await sut.GetPersonData(1);
 
         // Assert
+#pragma warning disable 4014 // For .Received await is not required, so suppress warning “Consider applying the 'await' operator”.
+        httpClient.Received().GetAsync("https://swapi.dev/api/people/1/");
+#pragma warning restore 4014
+
         Assert.That(person.Name, Is.EqualTo("Luke Skywalker"));
         Assert.That(person.BirthYear, Is.EqualTo("19BBY"));
         Assert.That(person.Gender, Is.EqualTo("male"));
